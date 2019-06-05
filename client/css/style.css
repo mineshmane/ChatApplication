@@ -7,7 +7,7 @@
   height: 400px;
   border: 1px solid gray;
   padding: 30px;
-  background-color: lightgray;
+  background-color: whitesmoke;
 }
 
 .Label {
@@ -43,7 +43,7 @@
   text-align: right;
   float: none; */
 
-  background-color: grey;
+  background-color: green;
   border: none;
   color: white;
   padding: 15px;

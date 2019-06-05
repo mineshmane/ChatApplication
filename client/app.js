@@ -1,30 +1,52 @@
-var routerApp = angular.module('routerApp', ['ui.router']);
+var chatApp = angular.module('chatApp', ['ui.router']);
 
-routerApp.config(function ($stateProvider, $urlRouterProvider) {
+chatApp.config(function ($stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.otherwise('/home');
+    $urlRouterProvider.otherwise('/login');
 
-    $stateProvider
-
-        // HOME STATES AND NESTED VIEWS ========================================
-        .state('home', {
-            url: '/register',
-            templateUrl: '../Templates/Register.html',
-            controller: 'controlRegister'
-
+        $stateProvider.state('home',{
+            url:'/home',
+            templateUrl: './Templates/Register.html',
+            controller:'controlRegister'
         })
-
-        // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
-        .state('login', {
-            // we'll get to this in a bit   
-            url: '/login',
-            templateUrl: 'templates/login.html',
-            controller: 'controlLogin'
-        });
-
+        $stateProvider.state('login',{
+            url:'/login',
+            templateUrl:'Templates/login.html',
+            controller:'controlLogin'
+        })
+        // $stateProvider.state('forget',{
+        //     url:'/forget',
+        //     templateUrl:'Templates/ForgotPassword.html',
+        //     controller:'controlForgotPassword'
+        // })
+    
+        // $stateProvider.state('reset',{
+        //     url:'/reset/:token',
+        //     templateUrl:'Templates/resetPassword.html',
+        //     controller:'controlReset'
+        // })
 });
 
 
+
+
+
+
+
+ // $stateProvider
+    //     // HOME STATES AND NESTED VIEWS ========================================
+    //     .state('home', {
+    //         url: '/register',
+    //         templateUrl: '../Templates/Register.html',
+    //         controller: 'controlRegister'
+    //     })
+    //     // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
+    //     .state('login', {
+    //         // we'll get to this in a bit   
+    //         url: '/login',
+    //         templateUrl: 'Templates/login.html',
+    //         controller: 'controlLogin'
+    //     });
 
 
 

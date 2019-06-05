@@ -1,18 +1,21 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html ng-app="client">
 
 <head>
-  <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script> -->
+   <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>  -->
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 
 
   <link href="../css/style.css" type="text/css" rel="stylesheet">
 </head>
 
-<body>
+<body> --> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 
-  <div ng-controller="controlRegister">
+    <base href="../css/style.css" type="text/css" rel="stylesheet">
+  <div  ng-controller="controlRegister">
+    
     <form novalidate>
       <title>Registeration</title>
       <br>
@@ -24,17 +27,15 @@
           <form name="register" method="POST">
 
             <input type="text" id="txtfirstname" ng-model="firstName" class="Input" placeholder="First Name">
-            <input type="text" id="txtfirstname" ng-model="firstName" class="Input" placeholder="Last Name"><br><br>
-
-
+            <input type="text" id="txtfirstname" ng-model="lastName" class="Input" placeholder="Last Name"><br><br>
             <input type="email" id="txtemailId" ng-model="email" class="InputEmail" placeholder="Email ID"><br><br>
-
-
             <input type="password" id="txtpassword" ng-model="password" class="Input" placeholder="Password">
-
             <input type="password" id="txtpsword" ng-model="repassword" class="Input" placeholder="confirm"><br><br>
             <div>
-              <button type="button" ng-click="register()" class="Button">Register</button>
+               <button type="button" ng-click="register()" class="Button">Register</button>
+            <!--  <button class="btn btn-primary" type="submit">Button</button> -->
+
+              <input ng-click="register()" class="btn btn-primary"  type="submit" value="Submit">
               <span></span>
             </div>
 
@@ -48,6 +49,6 @@
 
   </div>
 
-</body>
+<!-- </body>
 
-</html>
+</html> -->

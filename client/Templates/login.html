@@ -1,52 +1,44 @@
-<!DOCTYPE html>
-<html ng-app="client">
+<link rel="stylesheet" href="../css/style.css" type="text/css">
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script> -->
+
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> -->
 
 
-<head>
-    <link rel="stylesheet" href="../css/style.css" type="text/css">
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script> -->
-
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> -->
 
 
-</head>
 
-<body>
 
-    <div ng-controller="controlLogin">
-        <form novalidate>
-            <title>login</title>
+<div ng-controller="controlLogin">
+    <form novalidate>
+        <title>login</title>
 
-            <body style="margin-top:100px; ">
+        <body style="margin-top:100px; ">
 
-                <div class="body" style="margin-left:350px;">
-                    <br>
-                    <form>
-                        <h2>Login</h2>
-                        <!-- <label class="email" style="margin: 350" class="Label">Email ID</label><br> -->
-                        <input type="email" id="txtEmailID" ng-model="email" class="Input" placeholder="Email ID"><br><br>
+            <div class="body" style="margin-left:350px;">
+                <br>
+                <form>
+                    <h2>Login</h2>
+                    <!-- <label class="email" style="margin: 350" class="Label">Email ID</label><br> -->
+                    <input type="email" id="txtEmailID" ng-model="email" class="Input" placeholder="Email ID"><br><br>
 
-                        <!-- <label style="margin: 350" class="Label">Password</label><br> -->
-                        <input type="password" id="txtPassword" ng-model="password" class="Input" placeholder="Password"><br><br>
+                    <!-- <label style="margin: 350" class="Label">Password</label><br> -->
+                    <input type="password" id="txtPassword" ng-model="password" class="Input"
+                        placeholder="Password"><br><br>
 
-                        <button ng-click="login()" id="btnSubmit" class="Button">Submit</button><br><br>
+                    <button ng-click="login()" id="btnSubmit" class="Button">Submit</button><br><br>
 
-                      <!--  <a ui-sref="forget">Forget Password?</a><br>
-                        <a ui-sref="Register">Create new Account</a><br> -->
+                    <!-- <a ui-sref="forget">Forget Password?</a><br>
+                    <a ui-sref="/Register">Create new Account</a><br> -->
 
-                        <a href="http://localhost:3000/#!/forget">Forgot Password</a><br>
-            <a href="http://localhost:3000/#!/register">Create new account</a><br>  
+                    <a href="http://localhost:3000/#!/forget">Forgot Password</a><br>
+                    <a href="http://localhost:3000/#!/register">Create new account</a><br>
 
-                </div>
-        </form>
-        </style>
-</body>
+            </div>
+    </form>
+    </style>
+    </body>
 
-</html>
-</form>
+
+    </form>
 
 </div>
-
-</body>
-
-</html>
