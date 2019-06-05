@@ -1,0 +1,33 @@
+.body
+ {
+    margin-top: 100px;
+    width: 300px;
+    border: 1px solid black;
+    padding: 90px;
+    background-color: lightgray
+     }
+
+  .login_label {
+    
+    display: inline-block;
+    text-align: right;
+    float: none;
+  }
+
+  .login_input {
+    display: inline-block;
+    text-align: right;
+    padding: 5px;
+  }
+
+  .login_button {
+    display: inline-block;
+    text-align: center;
+    float: none;
+    
+  }
+  .login_image
+{
+  background-image: url("../assets/images.jpg");
+  max-height: auto;
+}
