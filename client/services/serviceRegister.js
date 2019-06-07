@@ -4,7 +4,7 @@ chatApp.service('serviceRegister',function($http,$location){
         console.log("data on service register---",data);
         $http({
             method:'POST',
-            url:'http://localhost:8081/register',
+            url:'http://localhost:3000/register',
             data:data
 
         }).then(
@@ -15,7 +15,7 @@ chatApp.service('serviceRegister',function($http,$location){
                 $location.path('/login');
             },
             function errorCallback(response){
-                console.log("registration  unsuccessful");
+                console.log("registration  unsuccessful",response);
                 $scope.message=response.data.message;
             }
         );

@@ -1,8 +1,8 @@
 
 
-chatApp.controller('controlLogin', function ($scope,$location) {
+chatApp.controller('controlLogin', function ($scope,$location,serviceLogin) {
 
-    console.log(" login called ");
+    console.log(" login controllrer called ");
     
     $scope.login = function () {
         var data = {
@@ -11,7 +11,7 @@ chatApp.controller('controlLogin', function ($scope,$location) {
         }
         console.log("data", data)
 
-       // serviceLogin.login(data, $scope);
+        serviceLogin.login(data, $scope);
 
     }
     $scope.register=function () {

@@ -1,141 +1,51 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const dbConfig = require('../config/databaseconfig')
-var routes = require('../server/router/route')
-var chatController = require('../server/controller/regController')
-const mongoose = require('mongoose');
-require('dotenv').config()
-const app = express();
-require('http').createServer(app);
-
-mongoose.Promise = global.Promise;
+const http = require('http');
 
 
 
-app.use(bodyParser.urlencoded({ extended: true }))
+var parser = require('body-parser')
 
-app.use(bodyParser.json());
+// create express app
+var app = express();
+var server = http.createServer(app);
+var routes = require('./router/userRouter')
+
+
 //For front end connectivity
 app.use(express.static('../client'));
 //connect to the database
 
 
+
+
+// parse requests of content-type - application/x-www-form-urlencoded
+app.use(parser.urlencoded({ extended: true }))
+
+// parse requests of content-type - application/json
+app.use(parser.json())
+
+// define a simple route
 app.use('/', routes)
 
-var server = app.listen(8080, () => {
+server.listen(3000, () => {
     console.log("Server is listening to port 3000");
+
 })
 
-const io = require('socket.io')(server);
-io.on('connection', function (socket) {
-    console.log("socket is connected successfully");
-    socket.on('createMessage', function (message) {
-        chatController.addMessage(message, (err, data) => {
-            console.log('msg from server', message)
-            if (err) {
-                console.log("Error in message", err);
 
-            }
-            else {
-                console.log(message, "in server");
-                io.emit('newMessageSingle', message);
-            }
-        })
-        socket.on('disconnect', function () {
-            console.log("Socket disconnected");
+// Configuring the database
+const dbConfig = require('../config/databaseconfig');
+const mongoose = require('mongoose');
 
-        });
-    });
+mongoose.Promise = global.Promise;
 
-});
-// app.use (error(err,res)={
-
-// status:false,
-// err:402,
-// error:"error in server"
-// });
-// catch(err)
-// {
-
-//     res.send(err);
-// }
-
-mongoose.connect(dbConfig.url, {
-    useNewUrlParser: true
-}).then(() => {
-    console.log(" DB connected sucessfully");
+// Connecting to the database
+mongoose.connect(dbConfig.url, { useNewUrlParser: true }).then(() => {
+    console.log("Successfully connected to the database");
 }).catch(err => {
-    console.log(" DB could not connect", err);
-    process.exit(0);
-})
-
-module.exports = app;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const express = require('express');
-// const http = require('http');
-// const bodyParser = require('body-parser');
-
-// var app=express();
-
-// var server=http.createServer(app);
-
-
-
-// const express = require('express');
-// const bodyParser = require('body-parser');
-// const dbConfig = require('../config/databaseconfig')
-// var routes = require('../server/router/router')
-
-// const mongoose = require('mongoose');
-// require('dotenv').config()
-
-
-// mongoose.Promise = global.Promise;
-
-
-
-// app.use(bodyParser.urlencoded({ extended: true }))
-
-// app.use(bodyParser.json());
-// //For front end connectivity
-// app.use(express.static('../client'));
-// //connect to the database
-
-
-// app.use('/', routes)
-
-// server.listen(3000,()=>{
-
-// })
-// var server = app.listen(3000, () => {
-//     console.log("Server is listening to port 3000");
-// })
+    console.log('Could not connect to the database. Exiting now...', err);
+    process.exit();
+});
 
 
 
