@@ -15,7 +15,7 @@ router.post('/register', userCtrl.register);
 
 
 //forget password API
-// router.post('/forget', userCtrl.forgetPassword);
+ router.post('/forget', userCtrl.forgetPassword);
 
 
 

@@ -22,9 +22,11 @@ console.log(" in server services data is ",req);
 
 exports.login = (data, callback) => {
     userModel.login(data, (err, result) => {
+        console.log('in ser after model',err,result);
+        
         if (err) {
             //display the error
-            console.log(err);
+            console.log('error in service',err);
             callback(err);
         }
         else {
@@ -37,6 +39,26 @@ exports.login = (data, callback) => {
 }
 
 
+
+
+
+exports.forgetPassword = (data, callback) => {
+ 
+        userModel.forgetPassword(data, (err, result) => {
+            if (err) {
+
+                //display the error 
+                console.log(err);
+                callback(err)
+            }
+            else {
+
+                //return the result of the function
+                return callback(null, result);
+            }
+        })
+    
+}
 
 
 

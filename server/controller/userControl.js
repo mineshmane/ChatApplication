@@ -1,6 +1,7 @@
 
 var userService = require('../services/userService');
-
+var middleToken=require('../mail/token');
+var middleEmail=require('../mail/mail')
 module.exports.register = (req, res) => {
   try {
     console.log("in register server controller data is ",req)
@@ -45,9 +46,8 @@ module.exports.login = (req, res) => {
       } else {
         console.log("data login server usercontroller: ", data);
 
-        console.log('login success')
-        return res.status(200).send({
-          message: data,
+   
+        return res.status(200).send({message: data,
          // "token": token
         });
       }
@@ -58,7 +58,57 @@ module.exports.login = (req, res) => {
     //handle exception
     console.log(" eeror ");
 
-    res.send(err);
+    res.status(500).send(err);
   }
 
+}
+
+
+
+
+
+module.exports.forgetPassword = (req, res) => {
+  req.checkBody("email","not valid ").isEmail();
+  //var err=req.validationError();
+  try {
+    userService.forgetPassword(req, (err, result) => {
+
+
+      var response = {};
+      console.log("forget paswd")
+      if (err) {
+        //send status as false to show error
+        response.success = false;
+        response.err = err;
+        res.status(400).send(response);
+
+      }
+      else {
+        //send status as true for successful result
+        response.success = true;
+        response.result = result;
+        //res.status(200).send(response);
+        console.log("resr", response)
+        const payload = {
+          _id: response.result._id
+        }
+        console.log("uuuuuuu", payload._id)
+        console.log("ppppppp", payload)
+        //call the function to create a token
+        const resObj = middleToken.generateNewToken(payload);
+        console.log("Obj", resObj);
+        //url for reset password with the generated token
+        const url = `http://localhost:3000/#/reset/${resObj.token}`;
+        console.log("url", url)
+        //call sendMail function
+        middleEmail.mail(url);
+        res.status(200).send(url);
+      }
+
+    })
+  }
+  catch (err) {
+    //handle exception
+    req.send(err);
+  }
 }
