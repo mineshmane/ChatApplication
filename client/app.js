@@ -19,7 +19,7 @@ chatApp.config(function ($stateProvider, $urlRouterProvider) {
         })
 
         .state('reset', {
-            url: '/reset',
+            url: '/reset/:token',
             templateUrl: 'templates/resetPassword.html',
             controller: 'controlReset'
         })

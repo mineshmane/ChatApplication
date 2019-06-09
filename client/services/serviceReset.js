@@ -1,4 +1,3 @@
-
 chatApp.service('serviceResetPassword',function($http,$location){
 
     this.resetPassword=function(data,$scope){

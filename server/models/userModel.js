@@ -1,11 +1,10 @@
 const mongoose = require('mongoose');
-
 var jwt = require('jsonwebtoken');
 var config = require('../config/config');
 
 
 const bcrypt = require('bcrypt');
-const saltRounds = 10;
+
 
 /**
 * @description    : create schema
@@ -52,18 +51,21 @@ var user = mongoose.model('user', userData);
 
 
 
-function hash(password, callback) {
-    bcrypt.hash(password, 10, function (err, hash) {
-        // Store hash in your password DB.
-        if (err) {
-            callback(err);
-        } else {
-            callback(null, hash);
-        }
+// function hash(password, callback) {
+//     bcrypt.hash(password, 10, function (err, hash) {
+//         // Store hash in your password DB.
+//         // if (err) {
+//         //     callback(err);
+//         // } else {
+//         //     callback(null, hash);
+//         // }
 
-    });
+//     });
+// }
+function hash(password) {
+    var hash = bcrypt.hashSync(password, 10)
+    return hash;
 }
-
 
 
 exports.register = (req, callback) => {
@@ -148,7 +150,7 @@ exports.login = (req, callback) => {
                     if (obj) {
                         console.log("Login result returniing  no error if", obj);
 
-                        var token = jwt.sign({ email: req.email }, config.secretKey);
+                        var token = jwt.sign({ email: req.email }, config.secretKey, { expiresIn: 86400000 });
                         console.log(token);
 
 
@@ -183,6 +185,8 @@ exports.forgetPassword = (res, callback) => {
 
     //check the email address 
     user.findOne({ "email": res.body.email }, function (err, result) {
+        console.log(" result in find",result);
+        
         if (err) {
             console.log(err);
         }
@@ -199,10 +203,31 @@ exports.forgetPassword = (res, callback) => {
 
         }
     })
-    
+
 }
 
 
 
+module.exports.reset = (res, callback) => {
+    
+        //generate a hash password for new password
+        console.log("in model reset");
+    
+        let newPassword = hash(res.body.password)
+        console.log("new pswd", newPassword);
+        console.log(JSON.stringify(res.decoded))
+        // update the new password in place of old password
+        user.updateOne({ '_id': res.decoded.payload._id }, { 'password': newPassword }, (err, data) => {
+            if (err) {
+                console.log("err in reset model", err);
+                callback(err)
+            }
+            else {
+                console.log("fine")
+                callback(null, data);
+            }
+        });
+    
+}
 
 

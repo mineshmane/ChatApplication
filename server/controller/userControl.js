@@ -1,10 +1,11 @@
 
 var userService = require('../services/userService');
-var middleToken=require('../mail/token');
-var middleEmail=require('../mail/mail')
+var middleToken = require('../middleware/token');
+var middleEmail = require('../middleware/mail')
+var jwt = require('jsonwebtoken');
 module.exports.register = (req, res) => {
   try {
-    console.log("in register server controller data is ",req)
+    console.log("in register server controller data is ", req)
 
     // res.send(req.body)
     userService.register(req, (err, result) => {
@@ -26,7 +27,7 @@ module.exports.register = (req, res) => {
   catch (err) {
     //handle exception
     res.send(err);
-    console.log(" error ",err);
+    console.log(" error ", err);
   }
 }
 
@@ -34,7 +35,7 @@ module.exports.register = (req, res) => {
 
 module.exports.login = (req, res) => {
   try {
-   
+
     userService.login(req.body, (err, data) => {
       console.log("ctrl 38", req.body);
 
@@ -46,9 +47,10 @@ module.exports.login = (req, res) => {
       } else {
         console.log("data login server usercontroller: ", data);
 
-   
-        return res.status(200).send({message: data,
-         // "token": token
+
+        return res.status(200).send({
+          message: data,
+          // "token": token
         });
       }
     })
@@ -68,7 +70,7 @@ module.exports.login = (req, res) => {
 
 
 module.exports.forgetPassword = (req, res) => {
-  req.checkBody("email","not valid ").isEmail();
+  //req.checkBody("email","not valid ").isEmail();
   //var err=req.validationError();
   try {
     userService.forgetPassword(req, (err, result) => {
@@ -88,12 +90,12 @@ module.exports.forgetPassword = (req, res) => {
         response.success = true;
         response.result = result;
         //res.status(200).send(response);
-        console.log("resr", response)
+        // console.log("resr", response)
         const payload = {
           _id: response.result._id
         }
-        console.log("uuuuuuu", payload._id)
-        console.log("ppppppp", payload)
+        console.log("payload id", payload._id)
+        console.log("payload", payload)
         //call the function to create a token
         const resObj = middleToken.generateNewToken(payload);
         console.log("Obj", resObj);
@@ -111,4 +113,34 @@ module.exports.forgetPassword = (req, res) => {
     //handle exception
     req.send(err);
   }
+}
+
+module.exports.reset = (req, res) => {
+  try {
+    var responseResult = {};
+    console.log('ctrl reset');
+    userService.reset(req, (err, result) => {
+      if (err) {
+        //send status as false to show error
+        console.log("ctrl if reset ")
+        responseResult.success = false;
+        responseResult.error = err;
+        res.status(500).send(responseResult)
+      }
+      else {
+        //send status as true for successful result
+        console.log('in user ctrl else');
+        responseResult.success = true;
+        responseResult.result = result;
+        res.status(200).send(responseResult);
+      }
+    })
+  } catch (err) {
+    //handle exception
+    console.log("err in ctrl reset catch",err);
+    
+    req.send(err);
+  }
+
+
 }

@@ -2,7 +2,7 @@
 
 
 chatApp.controller('controlReset',function($scope,serviceResetPassword){
-    console.log("ctrl reset pswd")
+    console.log("ctrl reset in controlller pswd")
     $scope.resetPassword=function(){
         var user ={
             'password':$scope.password,

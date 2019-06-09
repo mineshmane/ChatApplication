@@ -15,7 +15,7 @@ chatApp.service('serviceForgotPassword',function($http,$location){
                 localStorage.setItem("name",name);
                 localStorage.setItem("token",token);   
                 $scope.loginMessage="login Successful"  ;  
-                $location.path('/reset');   
+                //$location.path('/reset');   
             
             },
             function errorCallback(response){

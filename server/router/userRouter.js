@@ -5,7 +5,7 @@ var userCtrl = require('../controller/userControl');
 
 var router = express.Router();
 
-
+var verify = require('../middleware/tokenVerify')
 //login API
 router.post('/login', userCtrl.login);
 
@@ -15,10 +15,11 @@ router.post('/register', userCtrl.register);
 
 
 //forget password API
- router.post('/forget', userCtrl.forgetPassword);
+router.post('/forget', userCtrl.forgetPassword);
 
+console.log("in router");
 
-
+router.post('/reset/:token', verify.checkToken, userCtrl.reset);
 
 
 //API to add message into the database

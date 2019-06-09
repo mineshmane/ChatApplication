@@ -43,8 +43,11 @@ exports.login = (data, callback) => {
 
 
 exports.forgetPassword = (data, callback) => {
- 
+    //console.log(" request data in service forget",data);
+    
         userModel.forgetPassword(data, (err, result) => {
+
+           // console.log(" requested to model data in service forget",data);
             if (err) {
 
                 //display the error 
@@ -58,6 +61,22 @@ exports.forgetPassword = (data, callback) => {
             }
         })
     
+}
+
+
+exports.reset=(data,callback)=>{
+    console.log("in services reset");
+    
+
+    userModel.reset(data,(err,result)=>{
+        if(err){
+            callback(err);
+
+        }
+        else{
+            return callback(null,result)
+        }
+    })
 }
 
 
