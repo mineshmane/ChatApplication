@@ -217,7 +217,7 @@ module.exports.reset = (res, callback) => {
         console.log("new pswd", newPassword);
         console.log(JSON.stringify(res.decoded))
         // update the new password in place of old password
-        user.updateOne({ '_id': res.decoded.payload._id }, { 'password': newPassword }, (err, data) => {
+        user.update({ '_id': res.decoded.payload._id }, { 'password': newPassword }, (err, data) => {
             if (err) {
                 console.log("err in reset model", err);
                 callback(err)

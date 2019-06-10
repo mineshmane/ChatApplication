@@ -1,11 +1,17 @@
 chatApp.service('serviceResetPassword',function($http,$location){
 
-    this.resetPassword=function(data,$scope){
+    
+    this.resetPassword=function(data,headers,$scope){
     console.log(" service register reset",data);
+
+    console.log(" headers tonen:::",headers.token);
     $http({
     method:'POST',
-    url:'http://localhost:3000/reset/:token',
-    data:data
+    url:'http://localhost:3000/reset',
+    data:data,
+    headers:{
+        token : headers.token
+    }
     }).then(
 
     function successCallback(response){
@@ -14,10 +20,9 @@ chatApp.service('serviceResetPassword',function($http,$location){
     $scope.message="reset password successful";
     $location.path('/login');
     },
-
     function errorCallback(response){
-    consolde.log("reset password unsuccessful");
-    $scope.message=response.data.message.message;
+    console.log("reset password unsuccessful");
+    $scope.message=response.data.message;
     }
     )
     }

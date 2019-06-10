@@ -1,17 +1,12 @@
-/******************************************************************************
- *  Execution       :cmd> node server.js                      
- *  @description    :chat application
- *  @file           :tokenVerify.js
- *  @author         :minesh
- *  @version        :1.0
- 
- ******************************************************************************/
+
 var jwt = require('jsonwebtoken');
 var secret = "secretkey";
 try {
     exports.checkToken = (req, res, next) => {
         console.log("In authentication");
         var token = req.headers['token'];
+        console.log('token in vweryd   '+token);
+        
         if (token) {
             //verify the token here
             jwt.verify(token, secret, (err, decoded) => {

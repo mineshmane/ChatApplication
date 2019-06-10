@@ -19,7 +19,7 @@ router.post('/forget', userCtrl.forgetPassword);
 
 console.log("in router");
 
-router.post('/reset/:token', verify.checkToken, userCtrl.reset);
+router.post('/reset', verify.checkToken, userCtrl.reset);
 
 
 //API to add message into the database

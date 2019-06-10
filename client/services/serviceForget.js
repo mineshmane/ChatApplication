@@ -7,14 +7,14 @@ chatApp.service('serviceForgotPassword',function($http,$location){
             data:data,
         }).then(
             function successCallback(response){
-                console.log("Forgot password successful");
-                var userid=response.data.message[0]._id ;
-                var name=response.datamessage[0].firstName;
-                 var token=response.data.token;
-                localStorage.setItem("userid",userid);
-                localStorage.setItem("name",name);
-                localStorage.setItem("token",token);   
-                $scope.loginMessage="login Successful"  ;  
+                console.log("Forgot password successful",response);
+                // var userid=response.data.message[0]._id ;
+                // var name=response.datamessage[0].firstName;
+                //  var token=response.data.token;
+                // localStorage.setItem("userid",userid);
+                // localStorage.setItem("name",name);
+                // localStorage.setItem("token",token);   
+                // $scope.loginMessage="login Successful"  ;  
                 //$location.path('/reset');   
             
             },

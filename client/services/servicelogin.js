@@ -11,17 +11,12 @@ chatApp.service('serviceLogin', function ($http, $location) {
         }).then(
 
             function successCallback(response) {
-              
-                    console.log("login successful at servicelogin in client side");
-                    console.log('response', response)
-                    console.log('response1', response.data.message)
-                    $scope.message = "loginsuccess successful";
-                    $location.path('/forget');
 
-                
-                    
-
-                
+                console.log("login successful at servicelogin in client side");
+                console.log('response', response)
+                console.log('response1', response.data.message)
+                $scope.message = "loginsuccess successful";
+                $location.path('/forget');
 
             },
             function errorCallback(error) {
