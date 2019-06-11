@@ -1,13 +1,13 @@
 
-chatApp.service('serviceForgotPassword',function($http,$location){
-    this.forgotPassword=function(data,$scope){
+chatApp.service('serviceForgotPassword', function ($http, $location) {
+    this.forgotPassword = function (data, $scope) {
         $http({
-            method:'POST',
-            url:'http://localhost:3000/forget',
-            data:data,
+            method: 'POST',
+            url: 'http://localhost:3000/forget',
+            data: data,
         }).then(
-            function successCallback(response){
-                console.log("please check your email addresss for reset passpassword",response);
+            function successCallback(response) {
+                console.log("please check your email addresss for reset passpassword", response);
                 // var userid=response.data.message[0]._id ;
                 // var name=response.datamessage[0].firstName;
                 //  var token=response.data.token;
@@ -15,13 +15,13 @@ chatApp.service('serviceForgotPassword',function($http,$location){
                 // localStorage.setItem("name",name);
                 // localStorage.setItem("token",token);   
                 // $scope.loginMessage="login Successful"  ;  
-                //$location.path('/reset');   
-            
+                $location.path('/message');
+
             },
-            function errorCallback(response){
+            function errorCallback(response) {
                 console.log("register unsuccessful");
                 console.log(response);
-                $scope.loginMessage="EmailId Incorrect";
+                $scope.loginMessage = "EmailId Incorrect";
             }
         );
     }

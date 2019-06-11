@@ -16,7 +16,7 @@ chatApp.service('serviceLogin', function ($http, $location) {
                 console.log('response', response)
                 console.log('response1', response.data.message)
                 $scope.message = "login success successful";
-                $location.path('/dashboard');
+                $location.path('/chat');
 
             },
             function errorCallback(error) {

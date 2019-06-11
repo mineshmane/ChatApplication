@@ -24,6 +24,14 @@ chatApp.config(function ($stateProvider, $urlRouterProvider) {
             controller: 'controlReset'
         })
 
+
+
+        .state('chat', {
+            url: '/chat',
+            templateUrl: 'templates/dashboard.html',
+            controller: 'chatController'
+        })
+
        
 
     $urlRouterProvider.otherwise('/login');

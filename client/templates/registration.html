@@ -10,10 +10,10 @@
 
       <input type="text"  ng-model="firstName" class="Input" placeholder="First Name">
      
-      <input type="text"  ng-model="lastName" class="Input" placeholder="Last Name"><br><br>
-      <input type="email"  ng-model="email" class="InputEmail" placeholder="Email ID"><br><br>
-      <input type="password" ng-model="password" class="Input" placeholder="Password">
-      <input type="password" ng-model="repassword" class="Input" placeholder="confirm"><br><br>
+      <input type="text"  ng-model="lastName" class="Input" placeholder="Last Name" required><br><br>
+      <input type="email"  ng-model="email" class="InputEmail" placeholder="Email ID" required><br><br>
+      <input type="password" ng-model="password" class="Input" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+      <input type="password" ng-model="repassword" class="Input" placeholder="confirm" required><br><br>
       <div>
         <button type="button" ng-click="register()" class="Button">Register</button>
         <span></span>
