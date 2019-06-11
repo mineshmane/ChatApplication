@@ -17,7 +17,7 @@ chatApp.service('serviceResetPassword',function($http,$location){
     function successCallback(response){
     console.log("reset password successful");
     console.log(response);
-    $scope.message="reset password successful";
+    $scope.message="password reset successful";
     $location.path('/login');
     },
     function errorCallback(response){

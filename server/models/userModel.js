@@ -37,12 +37,12 @@ var userData = mongooseSchema({
     {
         timestamps: true
     });
-function model() {
+// function model() {
 
-}
-model.prototype.register = () => {
+// }
+// model.prototype.register = () => {
 
-}
+// }
 
 
 
@@ -51,21 +51,18 @@ var user = mongoose.model('user', userData);
 
 
 
-// function hash(password, callback) {
-//     bcrypt.hash(password, 10, function (err, hash) {
-//         // Store hash in your password DB.
-//         // if (err) {
-//         //     callback(err);
-//         // } else {
-//         //     callback(null, hash);
-//         // }
+function hash(password, callback) {
+    bcrypt.hash(password, 10, function (err, hash) {
+        // Store hash in your password DB.
+        if (err) {
+            callback(err);
+        } else {
+            callback(null, hash);
+        }
 
-//     });
-// }
-function hash(password) {
-    var hash = bcrypt.hashSync(password, 10)
-    return hash;
+    });
 }
+
 
 
 exports.register = (req, callback) => {
@@ -79,14 +76,23 @@ exports.register = (req, callback) => {
             console.log(err);
             return callback(err)
         } else {
+            console.log(" data in else", data);
+            console.log(" data in else", req.body.email);
+
             if (data.length > 0) {
                 console.log(" email already registered");
                 callback(data)
 
             } else {
+                console.log(" data in after entghelse", data);
+                console.log(" data in after entghelse", req.body.email);
+                console.log(" data in after entghelse", req.body.password);
 
                 hash(req.body.password, (err, data) => {
+                    console.log(" data in after entghelse", data);
                     if (err) {
+                        console.log(" hashing error ", err);
+
                         callback(err);
                     } else {
                         console.log(" hashed password", data);
@@ -185,8 +191,8 @@ exports.forgetPassword = (res, callback) => {
 
     //check the email address 
     user.findOne({ "email": res.body.email }, function (err, result) {
-        console.log(" result in find",result);
-        
+        console.log(" result in find", result);
+
         if (err) {
             console.log(err);
         }
@@ -209,25 +215,37 @@ exports.forgetPassword = (res, callback) => {
 
 
 module.exports.reset = (res, callback) => {
-    
-        //generate a hash password for new password
-        console.log("in model reset");
-    
-        let newPassword = hash(res.body.password)
-        console.log("new pswd", newPassword);
-        console.log(JSON.stringify(res.decoded))
-        // update the new password in place of old password
-        user.update({ '_id': res.decoded.payload._id }, { 'password': newPassword }, (err, data) => {
-            if (err) {
-                console.log("err in reset model", err);
-                callback(err)
-            }
-            else {
-                console.log("fine")
-                callback(null, data);
-            }
-        });
-    
+
+    //generate a hash password for new password
+    console.log("in model reset");
+
+    //let newPassword hashing 
+    hash(res.body.password, (err, newpassword) => {
+        console.log(" data in after entghelse", newpassword);
+        if (err) {
+            console.log(" hashing error ", err);
+
+            callback(err);
+        }
+        else {
+
+            console.log("new pswd", newpassword);
+            console.log(JSON.stringify(res.decoded))
+            // update the new password in place of old password
+            user.update({ '_id': res.decoded.payload._id }, { 'password': newpassword }, (err, data) => {
+                if (err) {
+                    console.log("err in reset model", err);
+                    callback(err)
+                }
+                else {
+                    console.log("fine")
+                    callback(null, data);
+                }
+            });
+
+        }
+
+    });
 }
 
 

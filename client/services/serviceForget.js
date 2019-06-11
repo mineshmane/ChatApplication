@@ -7,7 +7,7 @@ chatApp.service('serviceForgotPassword',function($http,$location){
             data:data,
         }).then(
             function successCallback(response){
-                console.log("Forgot password successful",response);
+                console.log("please check your email addresss for reset passpassword",response);
                 // var userid=response.data.message[0]._id ;
                 // var name=response.datamessage[0].firstName;
                 //  var token=response.data.token;
