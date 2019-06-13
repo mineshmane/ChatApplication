@@ -1,0 +1,16 @@
+aside
+{
+    height: 600px;
+    width: 400px;
+    border: 1px solid black;
+    float: left;
+    margin-top: -19px;
+}
+section
+{
+    height: 600px;
+    width: 912px;
+    border: 1px solid black;
+    float: left;
+    margin-top: -19px;
+}

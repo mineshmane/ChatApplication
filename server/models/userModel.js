@@ -249,3 +249,29 @@ module.exports.reset = (res, callback) => {
 }
 
 
+
+
+
+module.exports.allUser = (res, callback) => {
+    try {
+        //find the all the users in database
+        user.find({}, (err, data) => {
+            if (err) {
+                console.log(err, "error is there")
+                return callback(err);
+            }
+            else {
+                //return the result
+                return callback(null, data)
+            }
+        })
+    }
+    catch (err) {
+        //handle exception
+        res.send(err);
+    }
+}
+
+
+
+

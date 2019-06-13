@@ -78,11 +78,11 @@
     width: 100%;
     opacity: 0.9;
     border-radius: 25%;
-    }
+    } 
     
     button:hover {
     opacity:1;
-    }
+    } 
     
   
     h1{
@@ -156,26 +156,26 @@
     position: absolute;
     }
     /* Create two columns/boxes that floats next to each other */
-    nav {
+    /* nav {
     float: left;
     width: 30%;
     height: 440px; /* only for demonstration, should be removed */
     /* background: rgb(19, 104, 100); */
-    padding: 20px;
+    /*padding: 20px;
     /* background-color: rgb(28, 108, 161); */
-    background-color:  #D1F2EB;
+   /* background-color:  #D1F2EB;
     /* background-image: url("../assets/navimg.jpg");
     background-size: 400px 440px; */
-    text-align: left;
+    /*text-align: left;
     cursor: pointer;
     overflow-y:scroll;
     overflow-x: hidden;
-    }
+    } */
     
     /* Style the list inside the menu */
-    nav ul {
+    /* nav ul {
     text-align: center;
-    }
+    } */
     
     .gropChat{
     float:right;

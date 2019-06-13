@@ -78,6 +78,25 @@ exports.reset=(data,callback)=>{
         }
     })
 }
+module.exports.allUser = (data, callback) => {
+    try {
+        userModel.allUser(data, (err, result) => {
+            if (err) {
+                //throw the error
+                callback(err);
+            }
+            else {
+             
+                 console.log(" All list of users", result)
+                callback(null, result);
+            }
+        })
+    }
+    catch (err) {
+        //handle the exception
+        callback(err);
+    }
+}
 
 
 

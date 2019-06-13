@@ -5,29 +5,64 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
 
 
+<!-- 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+ -->
 
-   
+
+
+
+
+
     <script src="app.js"></script>
 
     <script src="controller/controlLogin.js"></script>
     <script src="controller/controlRegister.js"></script>
     <script src="controller/controlForgetPassword.js"></script>
     <script src="controller/constrolReset.js"></script>
+    <script src="controller/controlChat.js"></script>
 
     <script src="services/serviceRegister.js"></script>
     <script src="services/servicelogin.js"></script>
     <script src="services/serviceForget.js"></script>
     <script src="services/serviceReset.js"></script>
+    <script src="services/chatService.js"></script>
 
 
     <link href="css/style.css" rel="stylesheet" type="text/css">
- 
-    <link  rel="stylesheet" type="text/css" href="css/dash.css"> 
+
+    <!-- <link  rel="stylesheet" type="text/css" href="css/.css">  -->
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-socket-io/0.7.0/socket.min.js"></script>
 
 
 </head>
-
 <body ng-app="chatApp">
+<!-- 
+    <nav class="navbar navbar-inverse" role="navigation"  class="fixed-top" >
+        <div class="navbar-header">
+            <a class="navbar-brand" ui-sref="#">AngularUI Router</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a ui-sref="login">Home</a></li>
+            <li><a ui-sref="register">About</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a  href="#/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a href="#/login"><span class="glyphicon glyphicon-log-in"></span> logout</a></li>
+        </ul>
+    </nav> -->
+
+
+
+
 
     <div>
         <ui-view>

@@ -144,3 +144,35 @@ module.exports.reset = (req, res) => {
 
 
 }
+
+
+
+
+
+
+module.exports.allUser = (req, res) => {
+  try {
+    var responseResult = {};
+    console.log("In all user ctrl");
+    userService.allUser(req, (err, result) => {
+      if (err) {
+        //send status as false to show error
+        responseResult.success = false;
+        responseResult.error = err;
+        res.status(400).send(responseResult);
+      }
+      else {
+        //send status as true for successful result
+        responseResult.success = true;
+        responseResult.result = result;
+        res.status(200).send(responseResult);
+      }
+    })
+  } catch (err) {
+    //handle exception
+    req.send(err);
+  }
+}
+
+
+

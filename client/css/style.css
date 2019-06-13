@@ -1,10 +1,10 @@
-.register {
+.registerdd {
   align-content: center;
   align-items: center;
-  margin-top: 100px;
+  margin-top: 50px;
   margin-left: 850px;
   width: 450px;
-  height: 400px;
+  height: 500px;
   border: 1px solid gray;
   padding: 30px;
   background-color: whitesmoke;
@@ -94,7 +94,7 @@
   background-color: lightgray
 }
 
-.resetPswd{
+.resetPswdb{
   margin-top: 100px;
   border: 1px solid black;
   width: 200px;
@@ -104,10 +104,10 @@
 }
 
 .forgotPswd{
-  margin-top: 100px;
+  margin-top: 50px;
   border: 1px solid black;
-  width: 250px;
-  padding: 130px;
+  width: 500px;
+  padding: 120px;
   background-color: lightgray;
 
 }

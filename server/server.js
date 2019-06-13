@@ -1,7 +1,7 @@
 const express = require('express');
 const http = require('http');
 
-
+const chatcontroller=require('./controller/userControl')
 
 var parser = require('body-parser')
 
@@ -33,8 +33,38 @@ server.listen(3000, () => {
 })
 
 
+
+
+
+
+
+const io = require('socket.io')(server);
+io.on('connection', function (socket) {
+    console.log("socket is connected successfully");
+    socket.on('createMessage', function (message) {
+        chatcontroller.addMessage(message, (err, data) => {
+            console.log('msg from server', message)
+            if (err) {
+                console.log("Error in message", err);
+
+            }
+            else {
+                console.log(message, "in server");
+                io.emit('newMessageSingle', message);
+            }
+        })
+        socket.on('disconnect', function () {
+            console.log("Socket disconnected");
+
+        });
+    });
+
+});
+
+
+
 // Configuring the database
-const dbConfig = require('../config/databaseconfig');
+const dbConfig = require('./config/databaseconfig');
 const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
