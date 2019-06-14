@@ -138,7 +138,7 @@ exports.login = (req, callback) => {
             console.log(" user is not registered please register", err);
             return callback(err);
         } else if (result.length > 0) {
-            console.log("result in server usermodel after finding data: ", result);
+            console.log("result in server usermodel after finding data: ", result[0]._id);
             /**
              * @description: compare the database password with the user entered password
             */
@@ -147,31 +147,25 @@ exports.login = (req, callback) => {
             bcrypt.compare(req.password, result[0].password, function (err, obj) {
                 if (err) {
                     console.log("error in model please enter correct password: ", err);
-
                     callback(err);
                 }
                 else {
                     console.log('result after compare', obj);
-
                     if (obj) {
                         console.log("Login result returniing  no error if", obj);
-
                         var token = jwt.sign({ email: req.email }, config.secretKey, { expiresIn: 86400000 });
-                        console.log(token);
-
-
+                        console.log("token is printed after login: ",token);
                         callback(null, {
                             token: token,
-                            value: obj
+                            value: obj,
+                            userId: result[0]._id,
+                             userName:result[0].firstname
                         });
-
                     } else {
                         console.log("Login result returniing  no error else", obj);
                         callback({ message: 'Password Incorrect' });
-
                     }
                     //show result if data is correct
-
                 }
             })
         }
@@ -274,4 +268,82 @@ module.exports.allUser = (res, callback) => {
 
 
 
+/**
+ * @description:create schema for sender emailId, receiver enailID,and message 
+*/
+var chatSchema = new mongooseSchema({
+    "senderId": {
+        type: String,
+        // required: [true, "Sender id is require enter sender email id"]
+    },
 
+    "receiverId": {
+        type: String,
+        // required: [true, "Receiver id is require enter receiver email id"]
+    },
+
+    "message": {
+        type: String,
+        // required: [true, "Enter any message"]
+    }
+
+});
+var chat = mongoose.model('chatDatabase', chatSchema);
+
+
+module.exports.addMessage = (req, callback) => {
+    try {
+        console.log(' in model sender id', req.senderId)
+
+        const newMsg = new chat({
+            "senderId": req.senderId,
+            "receiverId": req.receiverId,
+            "message": req.message
+        });
+        console.log("new Msg in model==>", newMsg);
+        /**
+     * @description: save the message into the database
+    */
+        newMsg.save((err, result) => {
+            if (err) {
+                console.log("Fail to store the message", err);
+                return callback(err);
+            } else {
+                console.log("message stored in database");
+                return callback(null, result);
+            }
+        });
+    }
+
+    catch (err) {
+        console.log("result not found", err);
+        //  res.send(err)
+    }
+}
+
+
+
+
+module.exports.getUserMessage = (res, callback) => {
+    try {
+        //console.log("279:",res.body);
+        /**
+         * @description: find the all user messages and display it
+        */
+        chat.find({}, (err, result) => {
+            if (err) {
+                return callback(err);
+
+            }
+            else {
+                return callback(null, result);
+            }
+
+        })
+    }
+    catch (err) {
+        console.log("err c", err);
+
+        res.send(err);
+    }
+}

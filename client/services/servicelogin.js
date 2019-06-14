@@ -14,16 +14,11 @@ chatApp.service('serviceLogin', function ($http, $location) {
 
                 console.log("login successful at servicelogin in client side");
                 console.log('response', response)
-                console.log('response1', response.data.message)
-
-
-                var userid = response.data.message._id;
-                var name = response.data.message.firstname;
-                var token = response.data.token;
-                console.log("15 ls", userid);
-                localStorage.setItem("userid", userid);
-                localStorage.setItem("name", name);
-                localStorage.setItem("token", token);
+                console.log('Data=', response.data.message)
+                
+                localStorage.setItem('senderName', response.data.message.userName);//getting data from localstorage
+                localStorage.setItem("senderId", response.data.message.userId);
+                localStorage.setItem("token", response.data.message.token);
                 $scope.message = "login success successful";
                 $location.path('/chat');
 

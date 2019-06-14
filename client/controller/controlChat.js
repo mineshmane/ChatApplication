@@ -3,11 +3,11 @@
 chatApp.controller('controlChat', function ($scope, SocketService, $state, chatService) {
     console.log(" chat controller in");
     
-    // $scope.message = '';
+     $scope.message = '';
     $scope.allUserArr = [];
-    // $scope.currUserName = localStorage.getItem('name');
-    // $scope.currUser = localStorage.getItem('userid');
-    // $scope.token = localStorage.getItem('token')
+    $scope.currUserName = localStorage.getItem('name');
+     $scope.currUser = localStorage.getItem('userid');
+     $scope.token = localStorage.getItem('token')
 
     var token = $scope.token
     //console.log("token return $copen login ",token);

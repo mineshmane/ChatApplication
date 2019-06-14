@@ -5,6 +5,7 @@ aside
     border: 1px solid black;
     float: left;
     margin-top: -19px;
+    background-image: linear-gradient(#89f7fe , #66a6ff);
 }
 section
 {
@@ -12,5 +13,17 @@ section
     width: 912px;
     border: 1px solid black;
     float: left;
-    margin-top: -19px;
+    margin-top: -600px;
+    margin-left: 400px;
+    background-image: linear-gradient(#fdfcfb , #e2d1c3);
+}
+#textarea
+{
+    margin-top: 520px;
+}
+#sendbtn
+{
+    
+    height: 47px;
+    width: 70px;
 }

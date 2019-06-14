@@ -104,7 +104,7 @@
     }
     /* Style the header */
     header {
-    background-image: url("../assets/nature.jpg");
+   
     background-size: 1300px 300px;
     background-repeat: no-repeat;
     padding: 5px;
@@ -210,13 +210,10 @@
     }
     
     
-    .text
-    { 
-    width: 85%;
-    height: 40px;
+    textarea{
+      margin-top: 50%
+         }
     
-    box-sizing: border-box;
-    }
     .header
     {
       background-color: #99A3A4;

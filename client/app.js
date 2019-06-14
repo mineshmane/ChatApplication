@@ -28,7 +28,7 @@ chatApp.config(function ($stateProvider, $urlRouterProvider) {
 
         .state('chat', {
             url: '/chat',
-            templateUrl: 'templates/newdash.html',
+            templateUrl: 'templates/message.html',
             controller: 'controlChat'
         })
 

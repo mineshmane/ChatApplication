@@ -35,6 +35,8 @@ chatApp.service('chatService', function ($http) {
             console.log("get user msg is called")
             var arr = [];
             var usertoken = localStorage.getItem('token');
+            console.log(" token in get message mehtod ", token);
+            
             $http({
                 method: 'POST',//assigning value to http proprties 
                 url: 'http://localhost:3000/getUserMessage',//assigning value to http proprties 

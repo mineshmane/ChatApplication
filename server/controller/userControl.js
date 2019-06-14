@@ -37,7 +37,7 @@ module.exports.login = (req, res) => {
   try {
 
     userService.login(req.body, (err, data) => {
-      console.log("ctrl 38", req.body);
+      console.log(" requested", req.body);
 
       if (err) {
         console.log(err)
@@ -137,8 +137,8 @@ module.exports.reset = (req, res) => {
     })
   } catch (err) {
     //handle exception
-    console.log("err in ctrl reset catch",err);
-    
+    console.log("err in ctrl reset catch", err);
+
     req.send(err);
   }
 
@@ -174,5 +174,52 @@ module.exports.allUser = (req, res) => {
   }
 }
 
+
+
+
+
+module.exports.getUserMessage = (req, res) => {
+  try {
+    //   console.log("177:",req);
+    userService.getUserMessage(req, (err, result) => {
+
+
+      var response = {};
+      if (err) {
+        response.success = false;
+        response.err = err;
+        res.status(500).send(response);
+      }
+      else {
+        response.success = true;
+        response.result = result;
+        res.status(200).send(response);
+      }
+    })
+  }
+  catch (err) {
+    req.send(err);
+    console.log(err);
+
+  }
+}
+
+
+module.exports.addMessage = (req, callback) => {
+  try {
+    console.log(" in controller : ",req);
+    
+    userService.addMessage(req, (err, res) => {
+      if (err) {
+        callback(err);
+      } else {
+        return callback(null, res)
+      }
+    })
+
+  } catch (error) {
+
+  }
+}
 
 
