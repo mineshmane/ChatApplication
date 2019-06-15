@@ -32,15 +32,7 @@ chatApp.config(function ($stateProvider, $urlRouterProvider) {
             controller: 'controlChat'
         })
 
-        .state('mess', {
-            url: '/message',
-            templateUrl: 'templates/message.html',
-         
-        })
-
-
-
-
+       
     $urlRouterProvider.otherwise('/login');
 
 });

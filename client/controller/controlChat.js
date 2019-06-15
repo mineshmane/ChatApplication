@@ -18,14 +18,14 @@ chatApp.controller('controlChat', function ($scope, SocketService, $state, chatS
         SocketService.on('newMessageSingle', (message) => {
             //listening to the evnts
             console.log("in Socket serice on function message== ", message);
-
+            
             if (localStorage.getItem('userId') == message.senderId || (localStorage.getItem('userId') == message.receiverId && localStorage.getItem('ruserId') == message.senderId)) {
                 if ($scope.allMessageArr === undefined) {
                     $scope.allMessageArr = message;//assighning message to variable
                 } else {
                     console.log(" array",$scope.message);
                     
-                    $scope.allMessageArr.push($scope.message);
+                    $scope.allMessageArr.push(message);
                     console.log("arr", $scope.allMessageArr);
 
                 }
@@ -67,8 +67,9 @@ chatApp.controller('controlChat', function ($scope, SocketService, $state, chatS
 
                 'message': $scope.message
             };
-           // $scope.message = '';
             SocketService.emit('createMessage', msg);//emitting the message to the browser
+           $scope.message = '';
+
         }
     }
     catch (err) {
