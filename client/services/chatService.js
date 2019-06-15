@@ -5,10 +5,10 @@ chatApp.service('chatService', function ($http) {
             console.log("get all users called in service chat")
              var usertoken = localStorage.getItem('token');
             $http({
-                method: 'POST',//assigning value to http proprties 
+                method: 'GET',//assigning value to http proprties 
                 url: 'http://localhost:3000/allUser',//changes here...
                 headers: {
-                     token: usertoken,
+                     token: usertoken
                 }
             }).then(
                 function successCallback(response) {//call back function of http sevice
@@ -29,44 +29,54 @@ chatApp.service('chatService', function ($http) {
     catch (err) {
         console.log("error found here in getting users")
     }
- 
-        this.getUserMessage = function ($scope) {
+
+        this.getUserMessage = function ($scope,usertoken) {
             try {
             console.log("get user msg is called")
             var arr = [];
-            var usertoken = localStorage.getItem('token');
-            console.log(" token in get message mehtod ", token);
+            console.log(" get meaggae called");
             
+            var usertoken = localStorage.getItem('token');
+                console.log(" getmmessage called ");
+                
+            console.log(" token in get message mehtod ", usertoken);
+             console.log(" getting message ");
+             
             $http({
-                method: 'POST',//assigning value to http proprties 
+           
+                
+                method: 'GET',//assigning value to http proprties 
                 url: 'http://localhost:3000/getUserMessage',//assigning value to http proprties 
                 headers: {
                       'token': usertoken,
+                
                 }
             }).then(
+                
                 function successCallback(response) {
+                    console.log(" message caalling hyttp");
                     console.log("get user msg returns something")
                     console.log(response.data);
 
                     for (let i = 0; i < (response.data.result.length); i++) {  //(response.data.message).length *change was done
                         var a = response.data.result[i];
                         console.log("a is print is values" + a)
-                        if (((localStorage.getItem('userid') == a.senderId) &&
+                        if (((localStorage.getItem('userId') == a.senderId) &&
                             (localStorage.getItem('ruserId') == a.receiverId)) ||
-                            ((localStorage.getItem('userid') == a.receiverId &&
+                            ((localStorage.getItem('userId') == a.receiverId &&
                                 localStorage.getItem('ruserId') == a.senderId))) {
 
 
-                            console.log("local user is ", localStorage.getItem('userid'), "a user is ", a.senderId, " local rcvrid is ", localStorage.getItem('ruserId'), "  reciver is ", a.receiverId);
+                            console.log("local user is ", localStorage.getItem('userId'), "a user is ", a.senderId, " local rcvrid is ", localStorage.getItem('ruserId'), "  reciver is ", a.receiverId);
 
                             arr.push(a);//pushing all message to array
                             console.log("after if loop" + arr)
                         }
                     }
 
-                    $scope.allUserArr = arr;
+                    $scope.allMessageArr = arr;
 
-                    console.log("Users msg successfull ", arr);
+                    console.log("Users msg successfull ",  $scope.allMessageArr);
 
                 },
                 function errorCallback(response) {

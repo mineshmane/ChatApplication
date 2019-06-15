@@ -16,8 +16,8 @@ chatApp.service('serviceLogin', function ($http, $location) {
                 console.log('response', response)
                 console.log('Data=', response.data.message)
                 
-                localStorage.setItem('senderName', response.data.message.userName);//getting data from localstorage
-                localStorage.setItem("senderId", response.data.message.userId);
+                localStorage.setItem('userName', response.data.message.userName);//getting data from localstorage
+                localStorage.setItem("userId", response.data.message.userId);
                 localStorage.setItem("token", response.data.message.token);
                 $scope.message = "login success successful";
                 $location.path('/chat');

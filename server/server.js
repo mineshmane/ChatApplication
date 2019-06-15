@@ -1,7 +1,7 @@
 const express = require('express');
 const http = require('http');
 
-const chatcontroller=require('./controller/userControl')
+const chatcontroller = require('./controller/userControl')
 
 var parser = require('body-parser')
 
@@ -42,6 +42,8 @@ const io = require('socket.io')(server);
 io.on('connection', function (socket) {
     console.log("socket is connected successfully");
     socket.on('createMessage', function (message) {
+        console.log(" message in socketbserbvice", message);
+
         chatcontroller.addMessage(message, (err, data) => {
             console.log('msg from server', message)
             if (err) {

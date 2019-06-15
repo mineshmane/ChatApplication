@@ -207,8 +207,8 @@ module.exports.getUserMessage = (req, res) => {
 
 module.exports.addMessage = (req, callback) => {
   try {
-    console.log(" in controller : ",req);
-    
+    console.log(" addMessage  in controller : ", req);
+
     userService.addMessage(req, (err, res) => {
       if (err) {
         callback(err);

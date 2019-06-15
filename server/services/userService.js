@@ -80,28 +80,23 @@ exports.reset = (data, callback) => {
 }
 
 
-module.exports.allUser = (data, callback) => {
-    try {
-        userModel.allUser(data, (err, result) => {
-            if (err) {
-                //throw the error
-                callback(err);
-            }
-            else {
+exports.allUser = (data, callback) => {
 
-                console.log(" All list of users", result)
-                callback(null, result);
-            }
-        })
-    }
-    catch (err) {
-        //handle the exception
-        callback(err);
-    }
+    userModel.allUser(data, (err, result) => {
+        if (err) {
+            //throw the error
+            callback(err);
+        }
+        else {
+
+            console.log(" All list of users", result)
+            callback(null, result);
+        }
+    })
+
 }
 
-
-module.exports.addMessage = (req, callback) => {
+exports.addMessage = (req, callback) => {
     userModel.addMessage(req, (err, res) => {
         if (err) {
             return callback(err)
@@ -112,25 +107,20 @@ module.exports.addMessage = (req, callback) => {
 }
 
 
-module.exports.getUserMessage = (data, callback) => {
-    try {
-        // console.log("122:",req.body);
-        userModel.getUserMessage(data, (err, result) => {
-            if (err) {
-                //throw the error
-                return callback(err);
-            }
-            else {
-                 //return the result
-                //  console.log("result in services",result);
-                return callback(null, result);
-            }
-        })
-    }
-    catch (err) {
-        //handle exception
-        console.log("in catch err", err);
-        callback(err);
-    }
+exports.getUserMessage = (data, callback) => {
+
+    // console.log("122:",req.body);
+    userModel.getUserMessage(data, (err, result) => {
+        if (err) {
+            //throw the error
+            return callback(err);
+        }
+        else {
+            //return the result
+            //  console.log("result in services",result);
+            return callback(null, result);
+        }
+    })
+
 }
 

@@ -154,12 +154,12 @@ exports.login = (req, callback) => {
                     if (obj) {
                         console.log("Login result returniing  no error if", obj);
                         var token = jwt.sign({ email: req.email }, config.secretKey, { expiresIn: 86400000 });
-                        console.log("token is printed after login: ",token);
+                        console.log("token is printed after login: ", token);
                         callback(null, {
                             token: token,
                             value: obj,
                             userId: result[0]._id,
-                             userName:result[0].firstname
+                            userName: result[0].firstname
                         });
                     } else {
                         console.log("Login result returniing  no error else", obj);
@@ -206,9 +206,7 @@ exports.forgetPassword = (res, callback) => {
 
 }
 
-
-
-module.exports.reset = (res, callback) => {
+exports.reset = (res, callback) => {
 
     //generate a hash password for new password
     console.log("in model reset");
@@ -246,7 +244,7 @@ module.exports.reset = (res, callback) => {
 
 
 
-module.exports.allUser = (res, callback) => {
+exports.allUser = (res, callback) => {
     try {
         //find the all the users in database
         user.find({}, (err, data) => {
@@ -271,27 +269,55 @@ module.exports.allUser = (res, callback) => {
 /**
  * @description:create schema for sender emailId, receiver enailID,and message 
 */
-var chatSchema = new mongooseSchema({
+var chatSchema = mongooseSchema({
     "senderId": {
         type: String,
-        // required: [true, "Sender id is require enter sender email id"]
+        required: [true, "Sender id is require enter sender email id"]
     },
 
     "receiverId": {
         type: String,
-        // required: [true, "Receiver id is require enter receiver email id"]
+        required: [true, "Receiver id is require enter receiver email id"]
     },
 
     "message": {
         type: String,
-        // required: [true, "Enter any message"]
+        required: [true, "Enter any message not empty "]
     }
 
-});
+},
+    {
+        timestamps: true
+    });
 var chat = mongoose.model('chatDatabase', chatSchema);
 
 
-module.exports.addMessage = (req, callback) => {
+
+exports.getUserMessage = (res, callback) => {
+    try {
+        console.log("279:", res);
+        /**
+         * @description: find the all user messages and display it
+        */
+        chat.find({}, (err, result) => {
+            if (err) {
+                return callback(err);
+
+            }
+            else {
+                return callback(null, result);
+            }
+
+        })
+    }
+    catch (err) {
+        console.log("err c", err);
+
+        res.send(err);
+    }
+}
+
+exports.addMessage = (req, callback) => {
     try {
         console.log(' in model sender id', req.senderId)
 
@@ -324,26 +350,3 @@ module.exports.addMessage = (req, callback) => {
 
 
 
-module.exports.getUserMessage = (res, callback) => {
-    try {
-        //console.log("279:",res.body);
-        /**
-         * @description: find the all user messages and display it
-        */
-        chat.find({}, (err, result) => {
-            if (err) {
-                return callback(err);
-
-            }
-            else {
-                return callback(null, result);
-            }
-
-        })
-    }
-    catch (err) {
-        console.log("err c", err);
-
-        res.send(err);
-    }
-}

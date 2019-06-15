@@ -25,6 +25,7 @@
 
 <body>
 	<div class="container-fluid h-100">
+			<h2>{{currUserName}}</h2>
 		<div class="row justify-content-center h-100">
 			<div class="col-md-4 col-xl-3 chat">
 				<div class="card mb-sm-3 mb-md-0 contacts_card">
@@ -55,7 +56,8 @@
 							</div>
 						</div>
 					</div>
-					<div class="card-body msg_card_body">
+					<div class="card-body msg_card_body" >
+						<div ng-repeat="chat in allMessageArr  track by $index">
 						<div class="d-flex justify-content-start mb-4">
 
 							<div class="msg_cotainer" ng-show="currUser != chatDatabase.senderId">
@@ -68,10 +70,11 @@
 							</div>
 						</div>
 					</div>
+					</div>
 					
 					<div class="card-footer">
 						<div class="input-group">
-						<textarea name="" class="form-control type_msg"
+						<textarea name="" class="form-control type_msg" ng-model="message" ng-keyup="$event.keyCode == 13 && sendmessage()"
 								placeholder="Type your message..."></textarea>
 							<div class="input-group-append">
 								<button type="button" ng-click="sendmessage()" ; id="sendbtn">Send</button>
