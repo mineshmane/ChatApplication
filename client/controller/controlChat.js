@@ -1,5 +1,13 @@
 
 
+/******************************************************************************
+ *  Execution       :cmd> node server.js                      
+ *  @description    :chat application
+ *  @file           :chatController.js
+ *  @author         :minesh mane<mineshmane94@gamil.com
+ *  @version        :1.0
+ 
+ ******************************************************************************/
 chatApp.controller('controlChat', function ($scope, SocketService, $state, chatService) {
     console.log(" chat controller in");
 
@@ -14,19 +22,19 @@ chatApp.controller('controlChat', function ($scope, SocketService, $state, chatS
     if (token === null) {//if the tocken is null then go to login page
         $state.go('login');
     }
-    try {
-        SocketService.on('newMessageSingle', (message) => {
+    try {   // $scope.currentuser is changed for getting only for delever message to authorsied person
+        SocketService.on( $scope.currUser, (message) => {
             //listening to the evnts
-            console.log("in Socket serice on function message== ", message);
+            console.log(" new Message genrrated == ", message);
             
             if (localStorage.getItem('userId') == message.senderId || (localStorage.getItem('userId') == message.receiverId && localStorage.getItem('ruserId') == message.senderId)) {
                 if ($scope.allMessageArr === undefined) {
                     $scope.allMessageArr = message;//assighning message to variable
                 } else {
-                    console.log(" array",$scope.message);
+                  //  console.log(" array",$scope.message);
                     
                     $scope.allMessageArr.push(message);
-                    console.log("arr", $scope.allMessageArr);
+                   /// console.log("arr", $scope.allMessageArr);
 
                 }
             }
@@ -48,7 +56,7 @@ chatApp.controller('controlChat', function ($scope, SocketService, $state, chatS
         localStorage.setItem('rusername', userData.firstname);//getting data from localstorage
         localStorage.setItem('ruserId', userData._id);
         $scope.receiverUserName = localStorage.getItem('rusername');
-        $scope.getUserMessage();
+        $scope.getUserMessage();// call to choosen person get all message from server
     }
     //get all message
     $scope.getUserMessage = function () {
@@ -68,6 +76,8 @@ chatApp.controller('controlChat', function ($scope, SocketService, $state, chatS
                 'message': $scope.message
             };
             SocketService.emit('createMessage', msg);//emitting the message to the browser
+
+            $scope.allMessageArr.push(msg);
            $scope.message = '';
 
         }

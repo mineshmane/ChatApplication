@@ -1,4 +1,11 @@
-
+/******************************************************************************
+ *  Execution       :cmd> node server.js                      
+ *  @description    :chat application
+ *  @file           :app.js
+ *  @author         :Minesh Mane <mineshmane94@gmail.com>
+ *  @version        :1.0
+ 
+ ******************************************************************************/
 var chatApp = angular.module('chatApp', ['ui.router', 'btford.socket-io']);
 chatApp.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -23,8 +30,6 @@ chatApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: 'templates/resetPassword.html',
             controller: 'controlReset'
         })
-
-
 
         .state('chat', {
             url: '/chat',

@@ -1,3 +1,13 @@
+
+/******************************************************************************
+ *  Execution       :cmd> node server.js                      
+ *  @description    :chat application
+ *  @file           :server.js
+ *  @author         :Minesh Mane <mineshmane94@gmail.com>
+ *  @version        :1.0
+ 
+ ******************************************************************************/
+
 const express = require('express');
 const http = require('http');
 
@@ -32,9 +42,7 @@ const io = require('socket.io')(server);
 io.on('connection', function (socket) {
     console.log("socket is connected successfully");
     socket.on('createMessage', function (message) {
-        console.log(" message in socketbserbvice", message);
-        io.emit('newMessageSingle', message);
-
+        console.log(" listening create message ", message);     
         chatcontroller.addMessage(message, (err, data) => {
             console.log('msg from server', message)
             if (err) {
@@ -43,7 +51,7 @@ io.on('connection', function (socket) {
             }
             else {
                 console.log(message, "in server");
-                io.emit('newMessageSingle', message);
+                io.emit(message.receiverId, message);// message is going to only reciever  not going to self and whole group
             }
         })
         socket.on('disconnect', function () {

@@ -1,10 +1,22 @@
+/************************************************************************************************
+* Execution : 1. default  node server.js 
+* 
+* @Purpose : ChatService for getting all user from database and messages from data base using ajax calling chatapp 
+* @file : chatService.js
+* @module : 
+* @author : Minesh Mane <mineshmane94@gmail.com>
+* @since : 17-06-2019
+*    
+**********************************/
+
+
 
 chatApp.service('chatService', function ($http) {
     try {
         this.allUser = function ($scope, usertoken) {
             console.log("get all users called in service chat")
              var usertoken = localStorage.getItem('token');
-            $http({
+            $http({// ajax calling here
                 method: 'GET',//assigning value to http proprties 
                 url: 'http://localhost:3000/allUser',//changes here...
                 headers: {
@@ -15,9 +27,6 @@ chatApp.service('chatService', function ($http) {
                     console.log("chat service get all users it returns some response")
                     console.log("datbase reocrd:",response.data)
                     $scope.allUser = response.data.result;
-
-
-
                 },
                 function errorCallback(response) {
                     console.log("register Unsuccessfull ");
@@ -34,10 +43,10 @@ chatApp.service('chatService', function ($http) {
             try {
             console.log("get user msg is called")
             var arr = [];
-            console.log(" get meaggae called");
+          
             
             var usertoken = localStorage.getItem('token');
-                console.log(" getmmessage called ");
+              
                 
             console.log(" token in get message mehtod ", usertoken);
              console.log(" getting message ");

@@ -1,8 +1,16 @@
 
+/******************************************************************************
+ *  Execution       :cmd> node server.js                      
+ *  @description    :chat application
+ *  @file           :usercontrol.js
+ *  @author         :Minesh Mane <minehsmane94@gmail.com>
+ *  @version        :1.0
+ 
+ ******************************************************************************/
 var userService = require('../services/userService');
 var middleToken = require('../middleware/token');
 var middleEmail = require('../middleware/mail')
-var jwt = require('jsonwebtoken');
+
 module.exports.register = (req, res) => {
   try {
     console.log("in register server controller data is ", req)
@@ -67,11 +75,9 @@ module.exports.login = (req, res) => {
 
 
 
-
-
 module.exports.forgetPassword = (req, res) => {
-  //req.checkBody("email","not valid ").isEmail();
-  //var err=req.validationError();
+  req.checkBody("email","not valid ").isEmail();
+  var err=req.validationError();
   try {
     userService.forgetPassword(req, (err, result) => {
 

@@ -1,4 +1,12 @@
 
+/******************************************************************************
+ *  Execution       :cmd> node server.js                      
+ *  @description    :chat application
+ *  @file           :userRouter.js
+ *  @author         :Minesh Mane <mineshmane94@gmail.com>
+ *  @version        :1.0
+ 
+ ******************************************************************************/
 
 var express = require('express');
 var userCtrl = require('../controller/userControl');
@@ -30,7 +38,7 @@ router.get('/allUser', userCtrl.allUser);
 router.get('/getUserMessage',userCtrl.getUserMessage);
 
 //API to add message into the database
-router.post('/addMessage',userCtrl.addMessage)
+//router.post('/addMessage',userCtrl.addMessage)
 
 //API to add message into the database
 
